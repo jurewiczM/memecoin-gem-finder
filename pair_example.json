@@ -1,0 +1,73 @@
+{
+    "chainId": "ethereum",
+    "dexId": "uniswap",
+    "url": "https://dexscreener.com/ethereum/0x32f17b55e35c648922115484cb9b10fcf32bd423",
+    "pairAddress": "0x32f17b55E35c648922115484cB9B10FcF32BD423",
+    "labels": ["v3"],
+    "baseToken": {
+      "address": "0x7C90bf594aD51dC9C52D117971fEC6A5515B8004",
+      "name": "Rexas Finance",
+      "symbol": "RXS"
+    },
+    "quoteToken": {
+      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "name": "Wrapped Ether",
+      "symbol": "WETH"
+    },
+    "priceNative": "0.00003819",
+    "priceUsd": "0.1409",
+    "txns": {
+      "m5": {
+        "buys": 0,
+        "sells": 0
+      },
+      "h1": {
+        "buys": 13,
+        "sells": 2
+      },
+      "h6": {
+        "buys": 13,
+        "sells": 2
+      },
+      "h24": {
+        "buys": 13,
+        "sells": 2
+      }
+    },
+    "volume": {
+      "h24": 33185.39,
+      "h6": 33185.39,
+      "h1": 33185.39,
+      "m5": 0
+    },
+    "priceChange": {
+      "m5": 0,
+      "h1": -0.18,
+      "h6": -0.18,
+      "h24": -0.18
+    },
+    "liquidity": {
+      "usd": 90209125.57,
+      "base": 640013622,
+      "quote": 0.0005832
+    },
+    "fdv": 140948755,
+    "marketCap": 140948755,
+    "pairCreatedAt": 1733907779000,
+    "info": {
+      "imageUrl": "https://dd.dexscreener.com/ds-data/tokens/ethereum/0x7c90bf594ad51dc9c52d117971fec6a5515b8004.png?key=8a7b1d",
+      "header": "https://dd.dexscreener.com/ds-data/tokens/ethereum/0x7c90bf594ad51dc9c52d117971fec6a5515b8004/header.png?key=8a7b1d",
+      "openGraph": "https://cdn.dexscreener.com/token-images/og/ethereum/0x7c90bf594ad51dc9c52d117971fec6a5515b8004?timestamp=1733910000000",
+      "websites": [],
+      "socials": [
+        {
+          "type": "telegram",
+          "url": "https://t.me/Rexas_ETH"
+        }
+      ]
+    },
+    "boosts": {
+      "active": 10
+    }
+  }
+  
