@@ -2,8 +2,9 @@ import requests
 import pandas as py
 import csv
 import time
+import json
 
-__price_max__ = 0.000001
+__price_max__ = 0.0005
 __marketcap_max__ = 500000
 __marketcap_min__ = 75000
 __volume_min__ = 200
@@ -30,24 +31,32 @@ def tokenFinder(tokenIDs):
                     market_cap = pair.get('marketCap', 0)
                     created_at = pair.get('pairCreatedAt', 0)
                     volume_5m = pair.get('volume', {}).get('m5', 0)
-                    
-                    if (price_usd < __price_max__ and __marketcap_min__ <= market_cap <= __marketcap_max__ and 
-                        volume_5m > __volume_min__ and 
-                        created_at/1000 + 3600 <= time.time()):
-                        print(pair.get('baseToken', {}).get('address'))
-                        pair_list.append(air.get('baseToken', {}).get('address'))
+                    if price_usd < __price_max__:
+                        if __marketcap_min__ <= market_cap <= __marketcap_max__:
+                            if volume_5m > __volume_min__:
+                                if created_at / 1000 + 3600 <= time.time():
+                                        print(pair.get('baseToken', {}).get('address'))
+                                        pair_list.append(pair.get('baseToken', {}).get('address'))
+                # Your action here
+            
 
-            return pair_list
+                    
+                    #if (price_usd < __price_max__ and __marketcap_min__ <= market_cap <= __marketcap_max__ and 
+                    #    volume_5m > __volume_min__ and 
+                     #   created_at/1000 + 3600 <= time.time()):
+
+
         except requests.RequestException as e:
             print(f"An error occurred while fetching data for token {token_Id}: {e}")
         except ValueError as ve:
             print(f"Error converting price to float: {ve}")
         time.sleep(0.5)  
+    return pair_list
 
 def collectSocialData(foundTokens,tokenIDs):
     social_data = []
 
-    for token_Id in tokenIDs:
+    for token_Id in foundTokens:
         try:
             url = f"https://api.dexscreener.com/latest/dex/tokens/{token_Id}"
             result = requests.get(url).json()
@@ -82,10 +91,25 @@ foundTokens = tokenFinder(tokenIDs)
 #dexData = collectDexData()
 socialData = collectSocialData(foundTokens,tokenIDs)
 
-writeFile = open('./gems.csv','w')
-writer = csv.writer(writeFile)
+
+output_data = []
 
 for i in range(len(foundTokens)):
-    row = foundTokens[i]+';'+socialData[i]
-    writer.writerow(foundTokens[i])
+    
+    social_info = socialData[i]
+    
+    
+    entry = {
+        "token": foundTokens[i],  # Add the token
+        "pair": social_info['pair'],  # Add the 'pair' key from socialData
+        "socials": social_info['socials']  # Add the 'socials' key from socialData
+    }
+    
+    # Append the entry to the output data
+    output_data.append(entry)
+
+# Save to a JSON file
+with open("gems.json", "w") as json_file:
+    json.dump(output_data, json_file, indent=4)
+
 
